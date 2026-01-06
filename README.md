@@ -77,15 +77,11 @@ Normalization is fitted only on the training split to prevent temporal leakage.
 All results are obtained using the pointwise photonic QLSTM implementation in `pointwise_swaption.ipynb`
 on a reduced 3×3 swaption grid.
 
----
-
 ### Swaption Time Series (Raw Data)
 
 Raw local volatility time series for representative tenor–maturity pairs.
 
 ![Swaption time series](results/swaptions/time_series.png)
-
----
 
 ### Training Curves
 
