@@ -11,9 +11,7 @@ This work builds directly upon the original **QLSTM design and first MerLin phot
 
 This project originates from the **Mil’HaQ Fest 2025 hackathon (Quandela / Perceval Track)**, whose goal was to explore photonic quantum machine learning approaches for forecasting swaption volatility surfaces.
 
-The original hackathon prototype is available at:
-
-https://github.com/fwilhelmy/milhaq-fest-2025
+The original hackathon prototype is available at: https://github.com/fwilhelmy/milhaq-fest-2025
 
 Due to structural modeling choices and implementation-level issues, a stable convergent QLSTM could not be obtained within the hackathon timeframe.  
 This repository represents a **post-hackathon research continuation**, restructured from the ground up with the objective of producing a **minimal, correct, and reproducible photonic-compatible QLSTM baseline**.
@@ -33,7 +31,7 @@ This project reformulates volatility forecasting as a **local temporal predictio
 - bounded circuit width,
 - native photonic QLSTM gates,
 - stable training dynamics,
-- meaningful financial interpretation.
+- meaningful representation.
 
 ---
 
@@ -54,21 +52,11 @@ Given a rolling window of length \(T\), predict the next local volatility value:
 - tenor  
 - maturity  
 - time index  
-- local volatility  
-- neighborhood mean  
-- neighborhood standard deviation  
+- local volatility (optional)
+- neighborhood mean (optional)
+- neighborhood standard deviation (optional)  
 
 The neighborhood statistics introduce controlled cross-tenor coupling without increasing quantum circuit width.
-
----
-
-## Architectures
-
-- Classical LSTM baseline  
-- Gate-based QLSTM (qubit simulation)  
-- Photonic QLSTM (MerLin / Perceval backend)  
-
-All variants share identical recurrence equations; only the gate implementations differ.
 
 ---
 
@@ -80,7 +68,7 @@ All variants share identical recurrence equations; only the gate implementations
 | Dates            | 50    |
 | Sequence length  | 5     |
 | Epochs           | 10    |
-| Train/val split  | Strict chronological |
+| Train/Val/Test Split  | 0.7/0.15/0.15 (Chronological) |
 
 Normalization is fitted only on the training split to prevent temporal leakage.
 
@@ -93,7 +81,7 @@ Two major flaws in earlier prototypes were corrected:
 1. **Quantum parameter registration**  
    Quantum gate parameters are no longer stored in conflicting `ParameterList` containers, ensuring that PyTorch optimizes the parameters actually used during forward passes.
 
-2. **Temporal data hygiene**  
+2. **Temporal data leakage**  
    Chronological splitting and training-only normalization eliminate information leakage that previously caused constant-loss behavior.
 
 ---
@@ -117,17 +105,6 @@ At this stage, experiments are driven **entirely through notebooks**.
 
 The `pointwise_swaption.ipynb` notebook contains the **only fully functional swaption QLSTM pipeline**.
 
----
-
-## Folder Structure
-```graphhql
-    implementation.py        # CLI entry point
-    lib/                     # QLSTM / LSTM implementations
-    data/                    # Swaption datasets
-    configs/                 # Experiment configurations
-    outdir/                  # Auto-generated run artifacts (git-ignored)
-    tests/                   # Smoke tests
-```
 ---
 
 ## Research Scope
