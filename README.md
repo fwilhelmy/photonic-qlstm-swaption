@@ -41,11 +41,9 @@ Each data point corresponds to a single (tenor, maturity) location treated as a 
 
 ### Task
 
-Given a rolling window of length \(T\), predict the next local volatility value:
+Given a rolling window of length $\(T\)$, predict the next local volatility value:
 
-\[
-\{x_{t-T+1}, \dots, x_t\} \rightarrow x_{t+1}
-\]
+$\{x_{t-T+1}, \dots, x_t\} \rightarrow x_{t+1}$
 
 ### Features per time step
 
