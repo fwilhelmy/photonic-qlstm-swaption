@@ -72,6 +72,35 @@ Normalization is fitted only on the training split to prevent temporal leakage.
 
 ---
 
+## Experimental Results
+
+All results are obtained using the pointwise photonic QLSTM implementation in `pointwise_swaption.ipynb`
+on a reduced 3×3 swaption grid.
+
+---
+
+### Swaption Time Series (Raw Data)
+
+Raw local volatility time series for representative tenor–maturity pairs.
+
+![Swaption time series](results/swaptions/time_series.png)
+
+---
+
+### Training Curves
+
+The model converges smoothly and reaches a stable low-error regime within a small number of epochs.
+
+![Photonic QLSTM training](results/swaptions/training.png)
+
+![Photonic QLSTM zoomed](results/swaptions/zoomed.png)
+
+Predictions produced by the photonic QLSTM on the train, validation and test splits.
+Vertical dashed lines indicate chronological split boundaries.
+The model tracks both local oscillations and regime transitions without divergence.
+
+---
+
 ## Why This Implementation Converges
 
 Two major flaws in earlier prototypes were corrected:
